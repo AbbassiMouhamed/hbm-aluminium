@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Contact HBM ALU"
+      data-i18n="meta.contactDesc"
+      data-i18n-attr="content"
+    />
+    <title data-i18n="meta.contactTitle">HBM ALU | Contact</title>
+    <link rel="icon" href="images/HMBLogo.png" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/bootstrap-icons.css" />
+    <link rel="stylesheet" href="css/hbm-modern.css" />
+  </head>
+  <body>
+    <div class="site-topbar">
+      <div class="site-shell bar-wrap">
+        <span
+          ><i class="bi bi-chat-square-dots-fill"></i>
+          <span data-i18n="contact.top">Contactez-nous</span></span
+        ><span
+          ><i class="bi bi-clock-fill"></i>
+          <span data-i18n="contact.topHours"
+            >Lun-Ven 08:00-17:00 | Sam 08:00-13:00</span
+          ></span
+        >
+        <span class="topbar-controls">
+          <select class="lang-switch" data-lang-switch aria-label="Langue">
+            <option value="fr">FR</option>
+            <option value="en">EN</option>
+            <option value="ar">AR</option>
+          </select>
+          <button
+            class="theme-toggle"
+            type="button"
+            data-theme-toggle
+            aria-pressed="false"
+          >
+            <i class="bi bi-moon-stars-fill" aria-hidden="true"></i>
+            <span class="visually-hidden" data-i18n="theme.toggle"
+              >Changer le thème</span
+            >
+          </button>
+        </span>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="site-shell nav-wrap">
+        <a class="brand" href="index.html" aria-label="HBM ALU home">
+          <img src="images/HMBLogo.png" alt="HBM ALU" />
+          <span class="brand-badges" aria-hidden="true">
+            <img src="images/aluminium.png" alt="Aluminium" />
+            <img src="images/agrees.png" alt="Agrées" />
+          </span>
+        </a>
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="index.html" data-i18n="nav.home">Accueil</a>
+          <a href="about.html" data-i18n="nav.about">A Propos</a>
+          <a href="services.html" data-i18n="nav.services">Services</a>
+          <a href="projects.html" data-i18n="nav.projects">Projets</a>
+          <a href="contact.html" data-i18n="nav.contact">Contact</a>
+        </nav>
+        <a class="btn-main nav-cta" href="tel:+21627333020" data-i18n="cta.call"
+          >Appeler</a
+        >
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="site-shell hero-box reveal">
+          <div class="hero-content">
+            <span class="eyebrow"
+              ><i class="bi bi-send"></i>
+              <span data-i18n="contact.eyebrow"
+                >Demandez Votre Devis Gratuit</span
+              ></span
+            >
+            <h1 data-i18n="contact.heroTitle">Parlons de Votre Projet</h1>
+            <p data-i18n="contact.heroLead">
+              Remplissez le formulaire et nous vous répondrons dans les plus
+              brefs délais avec une proposition adaptée.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="site-shell contact-grid reveal delay-1">
+          <article class="contact-panel">
+            <div class="section-title">
+              <h2 data-i18n="contact.details">Nos Coordonnees</h2>
+            </div>
+            <div class="contact-list">
+              <div class="row-item">
+                <i class="bi bi-telephone"></i>
+                <div>
+                  <strong data-i18n="label.phone">Téléphone</strong><br /><a
+                    href="tel:+21627333020"
+                    >+216 27 333 020</a
+                  >
+                </div>
+              </div>
+              <div class="row-item">
+                <i class="bi bi-envelope"></i>
+                <div>
+                  <strong data-i18n="label.email">Email</strong><br /><a
+                    href="mailto:hbm.aluminium@gmail.com"
+                    >hbm.aluminium@gmail.com</a
+                  >
+                </div>
+              </div>
+              <div class="row-item">
+                <i class="bi bi-geo-alt"></i>
+                <div>
+                  <strong data-i18n="label.address">Adresse</strong><br />Route
+                  de Raoued km 5 Jaafar 1 Ariana, Tunisie
+                </div>
+              </div>
+              <div class="row-item">
+                <i class="bi bi-clock"></i>
+                <div>
+                  <strong data-i18n="label.hours">Horaires</strong><br /><span
+                    data-i18n-html="footer.hoursText"
+                    >Lundi - Vendredi: 08:00 - 17:00<br />Samedi: 08:00 -
+                    13:00<br />Dimanche: Fermé</span
+                  >
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="contact-panel">
+            <div class="section-title">
+              <h2 data-i18n="contact.form">Formulaire</h2>
+            </div>
+            <form
+              id="contactForm"
+              method="post"
+              action="/api/contact"
+              novalidate
+            >
+              <input
+                type="text"
+                name="name"
+                placeholder="Nom complet"
+                data-i18n-placeholder="form.fullName"
+                required
+              />
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Téléphone"
+                data-i18n-placeholder="form.phone"
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                data-i18n-placeholder="label.email"
+                required
+              />
+              <select name="service" required>
+                <option value="" data-i18n="form.service">
+                  Service souhaité
+                </option>
+                <option data-i18n="form.service.s1">
+                  Menuiserie Classique
+                </option>
+                <option data-i18n="form.service.s2">Pose Alucobond</option>
+                <option data-i18n="form.service.s3">Garde Corps</option>
+                <option data-i18n="form.service.s4">Murs Rideaux</option>
+              </select>
+              <textarea
+                name="message"
+                placeholder="Décrivez votre projet"
+                data-i18n-placeholder="form.message"
+              ></textarea>
+              <button class="btn-main" type="submit">
+                <i class="bi bi-send-check"></i>
+                <span data-i18n="btn.send">Envoyer</span>
+              </button>
+              <p class="form-status" role="status" aria-live="polite"></p>
+            </form>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-shell footer-grid">
+        <div>
+          <h3>HBM ALU</h3>
+          <p data-i18n="footer.thanks">
+            Merci pour votre confiance. Nous vous accompagnons de l'idée à la
+            réalisation.
+          </p>
+        </div>
+        <div>
+          <h3 data-i18n="footer.contactDirect">Contact Direct</h3>
+          <p>
+            <a href="tel:+21627333020">+216 27 333 020</a><br /><a
+              href="mailto:hbm.aluminium@gmail.com"
+              >hbm.aluminium@gmail.com</a
+            >
+          </p>
+        </div>
+        <div>
+          <h3 data-i18n="footer.networks">Reseaux</h3>
+          <p>
+            <a href="https://www.facebook.com" target="_blank" rel="noopener"
+              >Facebook</a
+            ><br /><a
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noopener"
+              >Instagram</a
+            >
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <nav class="mobile-app-nav" aria-label="Mobile app style navigation">
+      <a data-page href="index.html"
+        ><i class="bi bi-house-door-fill"></i
+        ><span data-i18n="nav.home">Accueil</span></a
+      >
+      <a data-page href="services.html"
+        ><i class="bi bi-grid-fill"></i
+        ><span data-i18n="nav.services">Services</span></a
+      >
+      <a data-page href="projects.html"
+        ><i class="bi bi-images"></i
+        ><span data-i18n="nav.projects">Projets</span></a
+      >
+      <a data-page href="contact.html"
+        ><i class="bi bi-chat-dots-fill"></i
+        ><span data-i18n="nav.contact">Contact</span></a
+      >
+      <a href="https://www.facebook.com" target="_blank" rel="noopener"
+        ><i class="bi bi-facebook"></i><span>Facebook</span></a
+      >
+      <a href="https://www.instagram.com" target="_blank" rel="noopener"
+        ><i class="bi bi-instagram"></i><span>Instagram</span></a
+      >
+    </nav>
+
+    <script src="js/hbm-modern.js"></script>
+  </body>
+</html>
