@@ -46,6 +46,8 @@
         "form.sending": "Envoi en cours...",
         "form.sent": "Message envoyé. Merci !",
         "form.error": "Erreur d'envoi. Réessayez plus tard.",
+        "form.localServer":
+          "Le formulaire ne peut pas fonctionner en mode fichier (file://). Lancez le site avec un serveur local (ex: vercel dev) ou testez sur Vercel.",
         "home.eyebrow": "Explorons Ensemble",
         "home.h1Lead": "Votre Partenaire de Confiance en Menuiserie",
         "home.h1Tail": "Aluminium",
@@ -204,6 +206,8 @@
         "form.sending": "Sending...",
         "form.sent": "Message sent. Thank you!",
         "form.error": "Sending failed. Please try again later.",
+        "form.localServer":
+          "The form can't work from file://. Run the site with a local server (e.g. vercel dev) or test on Vercel.",
         "home.eyebrow": "Let's Explore",
         "home.h1Lead": "Your Trusted Partner in",
         "home.h1Tail": "Aluminium",
@@ -360,6 +364,8 @@
         "form.sending": "جارٍ الإرسال...",
         "form.sent": "تم إرسال الرسالة. شكراً لك!",
         "form.error": "فشل الإرسال. حاول لاحقاً.",
+        "form.localServer":
+          "لا يمكن للنموذج العمل عند فتح الموقع عبر file://. شغّل الموقع عبر خادم محلي (مثل vercel dev) أو اختبره على Vercel.",
         "home.eyebrow": "لنبدأ معاً",
         "home.h1Lead": "شريكك الموثوق في نجارة",
         "home.h1Tail": "الألومنيوم",
@@ -622,6 +628,11 @@
 
     contactForm.addEventListener("submit", function (e) {
       e.preventDefault();
+
+      if (window.location && window.location.protocol === "file:") {
+        setStatus("error", "form.localServer");
+        return;
+      }
 
       setStatus("", "form.sending");
 
