@@ -1,114 +1,64 @@
-# HBM ALU — Static Website
+# HBM ALU — Next.js Website
 
-Modern, mobile-first static website for **HBM ALU** with:
+Production website for **HBM ALU**, migrated from a static template to **Next.js App Router** for:
 
-- Mobile “app-style” bottom navigation
-- Multilanguage UI (FR / EN / AR) with RTL support for Arabic
-- Light/Dark theme toggle (persisted)
-- Contact form that sends email via **Brevo Transactional Email** through a **Vercel Serverless Function**
+- Faster navigation + smoother interactions
+- A clean place for “logic layers” (e.g. contact form email sending)
+- Built-in SEO primitives (per-page metadata, semantic headings)
 
-> Note: The site is static, but the contact form requires a server-side endpoint to keep secrets private.
+## Routes
 
----
+- `/` (Home)
+- `/about`
+- `/services`
+- `/projects`
+- `/contact`
+- `POST /api/contact` (send contact form email)
 
-## Project Structure
+## Key Files
 
-- Pages: `index.html`, `about.html`, `services.html`, `projects.html`, `contact.html`
-- Main modern styles: `css/hbm-modern.css`
-- Main modern behavior (i18n, theme, contact submit): `js/hbm-modern.js`
-- Email endpoint for Vercel: `api/contact.js` (POST `/api/contact`)
-
----
+- Global layout: `src/app/layout.js`
+- Page routes: `src/app/*/page.js`
+- API route: `src/app/api/contact/route.js`
+- Static assets (CSS/JS/images/fonts): `public/`
 
 ## Run Locally
 
-### Option A (recommended): Run with Vercel Dev (supports `/api/contact`)
+1. Install dependencies:
+	- `npm install`
+2. Create a local env file:
+	- copy `.env.example` → `.env.local`
+	- fill in your Brevo credentials
+3. Start dev server:
+	- `npm run dev`
+4. Open:
+	- http://localhost:3000
 
-1. Install the Vercel CLI:
-   - `npm i -g vercel`
-2. From the project folder, start dev server:
-   - `vercel dev`
-3. Open the local URL printed by Vercel (typically `http://localhost:3000`).
+Important: don’t open pages via `file://...` (browser will block API calls).
 
-### Option B: Simple static server (no API)
+## Environment Variables (Brevo)
 
-If you only want to preview the UI (contact sending won’t work without `/api/contact`):
+The contact form can send email using **either** Brevo HTTP API or SMTP.
 
-- `npx serve .`
+Required (both options):
 
-Avoid opening HTML files directly with `file://...` because browsers will block `fetch()` to local file URLs.
+- `BREVO_TO_EMAIL`
 
----
-
-## Contact Form (Brevo)
-
-The contact form posts to `/api/contact` (implemented by `api/contact.js`).
-
-### Required environment variables
-
-Set these in **Vercel Project → Settings → Environment Variables**.
-
-You can use either:
-
-**Option A (recommended): Brevo HTTP API**
+Option A (recommended): Brevo HTTP API
 
 - `BREVO_API_KEY`
-- `BREVO_TO_EMAIL`
-- `BREVO_FROM_EMAIL` (must be an allowed/verified sender in Brevo)
+- `BREVO_FROM_EMAIL`
 - `BREVO_FROM_NAME` (optional)
 
-**Option B: Brevo SMTP**
+Option B: Brevo SMTP
 
-- `BREVO_TO_EMAIL`
 - `SMTP_HOST` (usually `smtp-relay.brevo.com`)
 - `SMTP_PORT` (usually `587`)
 - `BREVO_SMTP_USER`
 - `BREVO_SMTP_KEY`
 - `SMTP_FROM`
 
-### `.env` for local development
+## Deploy
 
-A `.env.example` file exists in the repo with placeholder values.
-
-For local testing with `vercel dev`, create your own `.env` (do not commit it) based on `.env.example`.
-
-```bash
-BREVO_API_KEY=your_real_brevo_api_key
-BREVO_TO_EMAIL=contact@yourdomain.com
-BREVO_FROM_EMAIL=no-reply@yourdomain.com
-BREVO_FROM_NAME=HBM ALU Website
-```
-
-Security note: do not expose `.env` publicly.
-
----
-
-## Deploy to Vercel
-
-1. Push this repo to GitHub (or another git provider).
-2. Import the project in Vercel.
-3. Add the environment variables listed above.
-4. Deploy.
-
-After deployment, the form will POST to:
-
-- `https://YOUR-DOMAIN.vercel.app/api/contact`
-
----
-
-## Troubleshooting
-
-### Contact form returns `server_not_configured`
-
-- The env vars are missing in Vercel.
-- Redeploy after adding env vars.
-
-### Contact form returns `brevo_error`
-
-- Check that `BREVO_FROM_EMAIL` is verified/allowed in Brevo.
-- Confirm the API key is for Brevo Transactional Email.
-
-### CORS / `origin 'null'` errors
-
-- Don’t open pages via `file://...`.
-- Use `vercel dev` or a local HTTP server.
+Deploy to Vercel as a standard Next.js project, and set the same environment variables in:
+Vercel → Project Settings → Environment Variables.
