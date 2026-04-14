@@ -636,10 +636,14 @@
       } catch (e) {
         // If FormData#forEach isn't available, fall back to basic reads
         payload.name = contactForm.querySelector('[name="name"]')?.value || "";
-        payload.phone = contactForm.querySelector('[name="phone"]')?.value || "";
-        payload.email = contactForm.querySelector('[name="email"]')?.value || "";
-        payload.service = contactForm.querySelector('[name="service"]')?.value || "";
-        payload.message = contactForm.querySelector('[name="message"]')?.value || "";
+        payload.phone =
+          contactForm.querySelector('[name="phone"]')?.value || "";
+        payload.email =
+          contactForm.querySelector('[name="email"]')?.value || "";
+        payload.service =
+          contactForm.querySelector('[name="service"]')?.value || "";
+        payload.message =
+          contactForm.querySelector('[name="message"]')?.value || "";
       }
 
       fetch(url, {

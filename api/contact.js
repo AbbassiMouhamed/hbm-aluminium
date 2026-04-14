@@ -12,6 +12,35 @@ function json(res, statusCode, payload) {
   res.end(JSON.stringify(payload));
 }
 
+async function sendViaSmtp({
+  host,
+  port,
+  user,
+  pass,
+  from,
+  to,
+  replyTo,
+  subject,
+  html,
+}) {
+  const nodemailer = require("nodemailer");
+
+  const transporter = nodemailer.createTransport({
+    host,
+    port,
+    secure: Number(port) === 465,
+    auth: { user, pass },
+  });
+
+  await transporter.sendMail({
+    from,
+    to,
+    replyTo,
+    subject,
+    html,
+  });
+}
+
 function escapeHtml(value) {
   return String(value)
     .replace(/&/g, "&amp;")
@@ -65,12 +94,26 @@ module.exports = async (req, res) => {
     return json(res, 405, { ok: false, error: "method_not_allowed" });
   }
 
-  const apiKey = process.env.BREVO_API_KEY;
   const toEmail = process.env.BREVO_TO_EMAIL;
+
+  // Option A: Brevo HTTP API
+  const apiKey = process.env.BREVO_API_KEY;
   const fromEmail = process.env.BREVO_FROM_EMAIL;
   const fromName = process.env.BREVO_FROM_NAME || "HBM ALU Website";
 
-  if (!apiKey || !toEmail || !fromEmail) {
+  // Option B: Brevo SMTP
+  const smtpHost = process.env.SMTP_HOST;
+  const smtpPort = process.env.SMTP_PORT;
+  const smtpUser = process.env.BREVO_SMTP_USER;
+  const smtpKey = process.env.BREVO_SMTP_KEY;
+  const smtpFrom = process.env.SMTP_FROM;
+
+  const canUseApi = Boolean(apiKey && toEmail && fromEmail);
+  const canUseSmtp = Boolean(
+    toEmail && smtpHost && smtpPort && smtpUser && smtpKey && smtpFrom,
+  );
+
+  if (!canUseApi && !canUseSmtp) {
     return json(res, 500, { ok: false, error: "server_not_configured" });
   }
 
@@ -111,37 +154,57 @@ module.exports = async (req, res) => {
     `<p><strong>Message:</strong><br />${escapeHtml(message).replace(/\n/g, "<br />")}</p>` +
     "</div>";
 
-  const payload = {
-    sender: { name: fromName, email: fromEmail },
-    to: [{ email: toEmail, name: "HBM ALU" }],
-    replyTo: { email, name },
-    subject,
-    htmlContent: html,
-  };
+  // Prefer API if both are configured.
+  if (canUseApi) {
+    const payload = {
+      sender: { name: fromName, email: fromEmail },
+      to: [{ email: toEmail, name: "HBM ALU" }],
+      replyTo: { email, name },
+      subject,
+      htmlContent: html,
+    };
+
+    try {
+      const resp = await fetch("https://api.brevo.com/v3/smtp/email", {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
+          "api-key": apiKey,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const text = await resp.text();
+      if (!resp.ok) {
+        return json(res, 502, {
+          ok: false,
+          error: "brevo_error",
+          status: resp.status,
+          response: text,
+        });
+      }
+
+      return json(res, 200, { ok: true });
+    } catch {
+      return json(res, 502, { ok: false, error: "fetch_error" });
+    }
+  }
 
   try {
-    const resp = await fetch("https://api.brevo.com/v3/smtp/email", {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        "content-type": "application/json",
-        "api-key": apiKey,
-      },
-      body: JSON.stringify(payload),
+    await sendViaSmtp({
+      host: smtpHost,
+      port: Number(smtpPort),
+      user: smtpUser,
+      pass: smtpKey,
+      from: smtpFrom,
+      to: toEmail,
+      replyTo: `${name} <${email}>`,
+      subject,
+      html,
     });
-
-    const text = await resp.text();
-    if (!resp.ok) {
-      return json(res, 502, {
-        ok: false,
-        error: "brevo_error",
-        status: resp.status,
-        response: text,
-      });
-    }
-
     return json(res, 200, { ok: true });
-  } catch (e) {
-    return json(res, 502, { ok: false, error: "fetch_error" });
+  } catch {
+    return json(res, 502, { ok: false, error: "smtp_error" });
   }
 };

@@ -1,0 +1,10 @@
+{
+  "name": "hbm-alu-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "HBM ALU static site with Vercel contact API",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "nodemailer": "^6.9.14"
+  }
+}

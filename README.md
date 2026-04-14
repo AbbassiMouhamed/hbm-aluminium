@@ -19,6 +19,7 @@ Modern, mobile-first static website for **HBM ALU** with:
 - Email endpoint for Vercel: `api/contact.js` (POST `/api/contact`)
 
 Legacy / optional:
+
 - `api/contact.php` is kept in the repo for PHP hosting, but **is not used on Vercel**.
 
 ---
@@ -49,16 +50,31 @@ The contact form posts to `/api/contact` (implemented by `api/contact.js`).
 
 ### Required environment variables
 
-Set these in **Vercel Project → Settings → Environment Variables**:
+Set these in **Vercel Project → Settings → Environment Variables**.
+
+You can use either:
+
+**Option A (recommended): Brevo HTTP API**
 
 - `BREVO_API_KEY`
 - `BREVO_TO_EMAIL`
 - `BREVO_FROM_EMAIL` (must be an allowed/verified sender in Brevo)
 - `BREVO_FROM_NAME` (optional)
 
+**Option B: Brevo SMTP**
+
+- `BREVO_TO_EMAIL`
+- `SMTP_HOST` (usually `smtp-relay.brevo.com`)
+- `SMTP_PORT` (usually `587`)
+- `BREVO_SMTP_USER`
+- `BREVO_SMTP_KEY`
+- `SMTP_FROM`
+
 ### `.env` for local development
 
-A `.env` file exists in the repo with placeholder values. For local testing with `vercel dev`, you can update it:
+A `.env.example` file exists in the repo with placeholder values.
+
+For local testing with `vercel dev`, create your own `.env` (do not commit it) based on `.env.example`.
 
 ```bash
 BREVO_API_KEY=your_real_brevo_api_key
