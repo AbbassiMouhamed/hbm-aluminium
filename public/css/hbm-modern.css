@@ -540,6 +540,13 @@ html[data-theme="dark"] .brand > img {
   padding: 2rem 1.2rem;
 }
 
+.hero-topbar {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
 .eyebrow {
   display: inline-flex;
   align-items: center;

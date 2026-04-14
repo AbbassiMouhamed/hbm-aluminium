@@ -79,23 +79,26 @@ export default function HomePage() {
         <section className="hero">
           <div className="site-shell hero-box reveal">
             <div className="hero-content">
-              <span className="eyebrow">
-                <i className="bi bi-stars"></i>{" "}
-                <span data-i18n="home.eyebrow">Explorons Ensemble</span>
-              </span>
+              <div className="hero-topbar">
+                <span className="eyebrow">
+                  <i className="bi bi-stars"></i>
+                  <span data-i18n="home.eyebrow">Explorons Ensemble</span>
+                </span>
+
+                <Link
+                  className="btn-main mobile-cta only-mobile"
+                  href="/contact"
+                >
+                  <i className="bi bi-lightning-charge-fill"></i>
+                  <span data-i18n="cta.quote">Demander un Devis</span>
+                </Link>
+              </div>
               <h1>
                 <span data-i18n="home.h1Lead">
                   Votre Partenaire de Confiance en Menuiserie
                 </span>
                 <span className="h1-tail">
                   <span data-i18n="home.h1Tail">Aluminium</span>
-                  <Link
-                    className="btn-main mobile-cta only-mobile h1-after-cta"
-                    href="/contact"
-                  >
-                    <i className="bi bi-lightning-charge-fill"></i>
-                    <span data-i18n="cta.quote">Demander un Devis</span>
-                  </Link>
                 </span>
               </h1>
               <p data-i18n="home.lead">
