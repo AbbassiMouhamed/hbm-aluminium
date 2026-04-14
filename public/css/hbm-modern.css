@@ -290,8 +290,13 @@ html[data-theme="dark"] .brand > img {
   cursor: pointer;
 }
 
-.brand-badges img:nth-child(2) {
+.brand-badges img + img {
   animation-delay: 0.22s;
+}
+
+.brand-badges img.agrees-badge {
+  background: #fff;
+  border-color: rgba(23, 33, 43, 0.16);
 }
 
 .badge-popover-backdrop {
@@ -318,6 +323,11 @@ html[data-theme="dark"] .brand > img {
   padding: var(--pop-pad);
 }
 
+.badge-popover.is-agrees {
+  background: #fff;
+  border-color: rgba(23, 33, 43, 0.16);
+}
+
 .badge-popover img {
   width: 100%;
   height: auto;
@@ -325,6 +335,10 @@ html[data-theme="dark"] .brand > img {
   object-fit: contain;
   background: rgba(23, 33, 43, 0.92);
   border-radius: 14px;
+}
+
+.badge-popover.is-agrees img {
+  background: #fff;
 }
 
 .badge-popover-close {

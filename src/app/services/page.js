@@ -44,7 +44,11 @@ export default function ServicesPage() {
             <img src="/images/HMBLogo.png" alt="HBM ALU" />
             <span className="brand-badges" aria-hidden="true">
               <img src="/images/aluminium.png" alt="Aluminium" />
-              <img src="/images/agrees.png" alt="Agrées" />
+              <img
+                className="agrees-badge"
+                src="/images/agrees.png"
+                alt="Agrées"
+              />
             </span>
           </Link>
           <nav className="nav-links" aria-label="Main navigation">

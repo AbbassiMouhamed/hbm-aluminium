@@ -18,11 +18,15 @@ export default function HomePage() {
             <i className="bi bi-envelope-fill"></i> hbm.aluminium@gmail.com
           </span>
           <span>
-            <i className="bi bi-geo-alt-fill"></i> Route de Raoued km 5 Jaafar
-            1 Ariana, Tunisie
+            <i className="bi bi-geo-alt-fill"></i> Route de Raoued km 5 Jaafar 1
+            Ariana, Tunisie
           </span>
           <span className="topbar-controls">
-            <select className="lang-switch" data-lang-switch aria-label="Langue">
+            <select
+              className="lang-switch"
+              data-lang-switch
+              aria-label="Langue"
+            >
               <option value="fr">FR</option>
               <option value="en">EN</option>
               <option value="ar">AR</option>
@@ -48,7 +52,11 @@ export default function HomePage() {
             <img src="/images/HMBLogo.png" alt="HBM ALU" />
             <span className="brand-badges" aria-hidden="true">
               <img src="/images/aluminium.png" alt="Aluminium" />
-              <img src="/images/agrees.png" alt="Agrées" />
+              <img
+                className="agrees-badge"
+                src="/images/agrees.png"
+                alt="Agrées"
+              />
             </span>
           </Link>
           <nav className="nav-links" aria-label="Main navigation">
@@ -112,7 +120,10 @@ export default function HomePage() {
                   <i className="bi bi-grid-1x2-fill"></i>
                   <span data-i18n="btn.viewServices">Voir Services</span>
                 </Link>
-                <Link className="btn-outline btn-outline-light" href="/projects">
+                <Link
+                  className="btn-outline btn-outline-light"
+                  href="/projects"
+                >
                   <i className="bi bi-images"></i>
                   <span data-i18n="btn.viewGallery">Voir Galerie</span>
                 </Link>
@@ -167,7 +178,11 @@ export default function HomePage() {
         <section className="section">
           <div className="site-shell section-title">
             <h2 data-i18n="home.featured">Services Vedettes</h2>
-            <Link className="btn-outline" href="/services" data-i18n="btn.seeAll">
+            <Link
+              className="btn-outline"
+              href="/services"
+              data-i18n="btn.seeAll"
+            >
               Tout Voir
             </Link>
           </div>
@@ -327,8 +342,11 @@ export default function HomePage() {
           <div>
             <h3 data-i18n="footer.hours">Horaires</h3>
             <p data-i18n-html="footer.hoursText">
-              Lundi - Vendredi: 08:00 - 17:00<br />Samedi: 08:00 - 13:00
-              <br />Dimanche: Fermé
+              Lundi - Vendredi: 08:00 - 17:00
+              <br />
+              Samedi: 08:00 - 13:00
+              <br />
+              Dimanche: Fermé
             </p>
           </div>
         </div>

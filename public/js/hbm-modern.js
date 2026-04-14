@@ -790,7 +790,7 @@
     });
   }
 
-  function openBadgePopover(src, alt) {
+  function openBadgePopover(src, alt, variant) {
     var existing = document.querySelector(".badge-popover-backdrop");
     if (existing) existing.remove();
 
@@ -801,6 +801,9 @@
 
     var popover = document.createElement("div");
     popover.className = "badge-popover";
+    if (variant) {
+      popover.classList.add("is-" + variant);
+    }
 
     var closeBtn = document.createElement("button");
     closeBtn.className = "badge-popover-close";
@@ -844,7 +847,11 @@
     img.addEventListener("click", function (e) {
       e.preventDefault();
       e.stopPropagation();
-      openBadgePopover(img.currentSrc || img.src, img.alt);
+      var src = img.currentSrc || img.src;
+      var isAgrees =
+        img.classList.contains("agrees-badge") ||
+        /\/images\/agrees\.(png|webp|jpe?g)(\?|#|$)/i.test(src);
+      openBadgePopover(src, img.alt, isAgrees ? "agrees" : "");
     });
   });
 })();

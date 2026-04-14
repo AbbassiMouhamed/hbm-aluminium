@@ -45,7 +45,11 @@ export default function AboutPage() {
           <Link className="brand" href="/" aria-label="HBM ALU home">
             <img src="/images/HMBLogo.png" alt="HBM ALU" />
             <span className="brand-badges" aria-hidden="true">
-              <img src="/images/agrees.png" alt="Agrées" />
+              <img
+                className="agrees-badge"
+                src="/images/agrees.png"
+                alt="Agrées"
+              />
               <img src="/images/aluminium.png" alt="Aluminium" />
             </span>
           </Link>
