@@ -53,17 +53,23 @@ export async function POST(req) {
   const phone = String(body?.phone || "").trim();
   const email = String(body?.email || "").trim();
   const service = String(body?.service || "").trim();
+  const subjectInput = String(body?.subject || "").trim();
   let message = String(body?.message || "").trim();
 
-  if (!name || !phone || !email || !service) {
+  if (!name || !email) {
     return json(400, { ok: false, error: "missing_fields" });
   }
   if (!isValidEmail(email)) {
     return json(400, { ok: false, error: "invalid_email" });
   }
-  if (message.length < 3) message = "(no message)";
+  if (message.length < 3) {
+    return json(400, { ok: false, error: "missing_fields" });
+  }
 
-  const toEmail = process.env.BREVO_TO_EMAIL;
+  const toEmail =
+    process.env.BREVO_TO_EMAIL ||
+    process.env.SMTP_FROM ||
+    process.env.BREVO_FROM_EMAIL;
 
   // Option A: Brevo HTTP API
   const apiKey = process.env.BREVO_API_KEY;
@@ -84,14 +90,19 @@ export async function POST(req) {
     return json(500, { ok: false, error: "server_not_configured" });
   }
 
-  const subject = `Nouveau message (Site) - ${service}`;
+  const topic = service || subjectInput || "Contact";
+  const subject = `Nouveau message (Site) - ${topic}`;
   const html =
     '<div style="font-family:Arial,sans-serif;line-height:1.5">' +
     "<h2>Nouveau message depuis le site</h2>" +
     `<p><strong>Nom:</strong> ${escapeHtml(name)}</p>` +
-    `<p><strong>Téléphone:</strong> ${escapeHtml(phone)}</p>` +
+    (phone ? `<p><strong>Téléphone:</strong> ${escapeHtml(phone)}</p>` : "") +
     `<p><strong>Email:</strong> ${escapeHtml(email)}</p>` +
-    `<p><strong>Service:</strong> ${escapeHtml(service)}</p>` +
+    (service
+      ? `<p><strong>Service:</strong> ${escapeHtml(service)}</p>`
+      : subjectInput
+        ? `<p><strong>Sujet:</strong> ${escapeHtml(subjectInput)}</p>`
+        : "") +
     `<p><strong>Message:</strong><br />${escapeHtml(message).replace(/\n/g, "<br />")}</p>` +
     "</div>";
 

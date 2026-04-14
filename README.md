@@ -25,14 +25,14 @@ Production website for **HBM ALU**, migrated from a static template to **Next.js
 ## Run Locally
 
 1. Install dependencies:
-	- `npm install`
+   - `npm install`
 2. Create a local env file:
-	- copy `.env.example` → `.env.local`
-	- fill in your Brevo credentials
+   - copy `.env.example` → `.env.local`
+   - fill in your Brevo credentials
 3. Start dev server:
-	- `npm run dev`
+   - `npm run dev`
 4. Open:
-	- http://localhost:3000
+   - http://localhost:3000
 
 Important: don’t open pages via `file://...` (browser will block API calls).
 
@@ -42,7 +42,9 @@ The contact form can send email using **either** Brevo HTTP API or SMTP.
 
 Required (both options):
 
-- `BREVO_TO_EMAIL`
+- `BREVO_TO_EMAIL` (recommended)
+
+Note: if `BREVO_TO_EMAIL` is not set, the app will fall back to `SMTP_FROM` (or `BREVO_FROM_EMAIL`) as the recipient.
 
 Option A (recommended): Brevo HTTP API
 
