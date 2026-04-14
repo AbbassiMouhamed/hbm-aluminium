@@ -347,7 +347,7 @@ html[data-theme="dark"] .brand > img {
   right: calc(var(--pop-pad) - 4px);
   border: 1px solid rgba(23, 33, 43, 0.18);
   background: rgba(244, 245, 247, 0.9);
-  color: var(--ink);
+  color: rgba(23, 33, 43, 0.92);
   width: 40px;
   height: 40px;
   border-radius: 999px;
