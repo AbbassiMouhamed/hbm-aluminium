@@ -18,10 +18,6 @@ Modern, mobile-first static website for **HBM ALU** with:
 - Main modern behavior (i18n, theme, contact submit): `js/hbm-modern.js`
 - Email endpoint for Vercel: `api/contact.js` (POST `/api/contact`)
 
-Legacy / optional:
-
-- `api/contact.php` is kept in the repo for PHP hosting, but **is not used on Vercel**.
-
 ---
 
 ## Run Locally
