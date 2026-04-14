@@ -1,10 +1,21 @@
 {
-  "name": "hbm-alu-site",
+  "name": "hbm-next",
+  "version": "0.1.0",
   "private": true,
-  "version": "1.0.0",
-  "description": "HBM ALU static site with Vercel contact API",
-  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "next dev --webpack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
   "dependencies": {
-    "nodemailer": "^6.9.14"
+    "next": "16.2.3",
+    "nodemailer": "^6.9.14",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "eslint": "^9",
+    "eslint-config-next": "16.2.3"
   }
 }
